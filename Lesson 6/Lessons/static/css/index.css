@@ -1,0 +1,21 @@
+body {
+    background-color: #424242!important;
+}
+
+#list_link {
+    border-style: none;
+    background-color: #01579b;
+}
+
+#list_link:hover {
+    background-color: #0277bd;
+}
+
+#list_button {
+    border-style: none;
+    background-color: #ff5722;
+}
+
+#list_button:hover {
+    background-color: #ff7043;
+}

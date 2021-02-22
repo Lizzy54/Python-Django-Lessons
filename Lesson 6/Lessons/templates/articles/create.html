@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание статьи{% endblock %}
+
+{% block content %}
+    <form method="POST" action="/articles/create">
+        {% csrf_token %}
+        <table>
+            <tr><td>Название статьи</td><td><input name="title" type="text"></td></tr>
+            <tr><td>Текст</td><td><textarea name="text" id="text" cols="30" rows="10"></textarea></td></tr>
+            <tr><td><input type="submit" value="Сохранить"></td></tr>
+        </table>
+    </form>
+{% endblock %}
