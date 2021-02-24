@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Статьи{% endblock %}
+
+{% block content %}
+    {% if articles_list %} 
+        <span class="card-title"><h3>Статьи</h3></span>
+        <div class="collection">
+            <a id="create_button" href="/articles/create" class="collection-item"><strong style="color: #fff;">Добавить новую статью</strong></a>
+            <br>
+            <table>
+                {% for a in articles_list %}
+
+                    <tr>
+                        <td style="padding: 2px; width: 80%;">
+                            <a id="list_link" href="{% url 'articles:article' a.id %}" class="collection-item">
+                                <span style="color: #fff;" class="badge">
+                                    {{a.date}}
+                                </span>
+                                
+                                <strong style="color: #fff;">
+                                    {{a.title}}
+                                </strong>
+                            </a>
+                        </td>
+                        <td style="padding: 2px;">
+                            <a class="waves-effect waves-light btn grey" href="{% url 'articles:article' a.id %}edit">Изменить</a>
+                            <a class="waves-effect waves-light btn red darken-1" href="{% url 'articles:article' a.id %}delete">Удалить</a>
+                        </td>
+                    </tr>
+
+                {% endfor %}                
+            </table>
+        </div>
+    {% else %}
+        <div class="collection">
+            <a id="create_button" href="/articles/create" class="collection-item"><strong style="color: #fff;">Добавить новую статью</strong></a>
+        </div>
+    {% endif %}
+
+{% endblock %}

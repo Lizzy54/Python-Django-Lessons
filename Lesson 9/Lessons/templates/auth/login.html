@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        Вы уже авторизованы
+    {% else %}
+        {% if login_error == 1 %}
+            <p style="color: #f00;">Неправильное имя пользователя или пароль</p>
+        {% endif %}
+        <form method="POST" action="{{ url }}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>
+                        Имя пользователя
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="username" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пароль
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="password" type="password">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Войти">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+
+{% endblock %}

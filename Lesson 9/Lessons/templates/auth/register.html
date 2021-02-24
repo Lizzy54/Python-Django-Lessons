@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        Вы уже авторизованы
+    {% else %}
+        {% if email_error == 1 %}
+            <p style="color: #f00;">Пользователь с таким e-mail уже зарегистрирован, проверьте введенные данные, или войдите в систему</p>
+        {% endif %}
+        {% if username_error == 1 %}
+            <p style="color: #f00;">Пользователь с таким именем пользователя уже зарегистрирован, введите другое</p>
+        {% endif %}
+        <form method="POST" action="{{ url }}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>
+                        Имя
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="name" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Фамилия
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="lastname" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        E-mail
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="e-mail" type="email">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя пользователя
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="username" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пароль
+                    </td>
+                    <td>
+                        <input style="color: #fff;" name="password" type="password">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Войти">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+
+{% endblock %}
