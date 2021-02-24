@@ -1,0 +1,41 @@
+body {
+    background-color: #424242!important;
+}
+
+#list_link {
+    border-style: none;
+    background-color: #01579b;
+}
+
+#list_link:hover {
+    background-color: #0277bd;
+}
+
+#edit_button {
+    border-style: none;
+    width: fit-content;
+    background-color: #bdbdbd;
+}
+
+#edit_button:hover {
+    background-color: #9e9e9e;
+}
+
+#delete_button {
+    border-style: none;
+    width: fit-content;
+    background-color: #f44336;
+}
+
+#delete_button:hover {
+    background-color: #ef5350;
+}
+
+#create_button {
+    border-style: none;
+    background-color: #388e3c;
+}
+
+#create_button:hover {
+    background-color: #43a047;
+}

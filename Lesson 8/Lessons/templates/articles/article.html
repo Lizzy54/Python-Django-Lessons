@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block content %}
+
+    <h1>{{article.title}}</h1>
+    <p style="word-wrap: break-word;">{{article.text}}</p>
+    <br>
+    <em>{{article.date}}</em>
+    <br>
+    <form method="POST" action="{{ url }}comment">
+        {% csrf_token %}
+        Имя
+        <input name="name" type="text" style="color: #fff;">
+        Текст
+        <textarea name="text" id="text" style="resize: none; height: 100px; width: 100%; color: #fff;"></textarea>
+        <input type="submit" value="Сохранить">
+    </form>
+    <br>
+    {% if comments %}
+        {% for a in comments %}
+            <h5>{{ a.name }}</h5>
+            <p style="word-wrap: break-word;">{{a.text}}</p>
+            <br>
+            <em>{{a.date}}</em>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

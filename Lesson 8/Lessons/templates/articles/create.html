@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <form method="POST" action="{{ url }}">
+        {% csrf_token %}
+        <table>
+            <tr><td>Название статьи</td><td><input name="title" type="text" value="{{ article.title }}" style="color: #fff;"></td></tr>
+            <tr><td>Текст</td><td><textarea name="text" id="text" style="resize: none; height: 350px; width: 100%; color: #fff;">{{ article.text }}</textarea></td></tr>
+            <tr><td><input type="submit" value="Сохранить"></td></tr>
+        </table>
+    </form>
+{% endblock %}
