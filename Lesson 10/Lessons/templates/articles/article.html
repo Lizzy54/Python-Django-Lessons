@@ -27,12 +27,14 @@
     <br>
     <em>{{article.date}}</em>
     <br>
-    <form method="POST" action="{{ url }}comment">
-        {% csrf_token %}
-        <textarea name="text" id="text" style="resize: none; height: 100px; width: 100%; color: #fff;"></textarea>
-        <input type="submit" value="Сохранить">
-    </form>
-    <br>
+    {% if user.is_authenticated %}
+        <form method="POST" action="{{ url }}comment">
+            {% csrf_token %}
+            <textarea name="text" id="text" style="resize: none; height: 100px; width: 100%; color: #fff;"></textarea>
+            <input type="submit" value="Сохранить">
+        </form>
+        <br>
+    {% endif %}
     {% if comments %}
         {% for a in comments %}
             <h5>{{ a.name }}</h5>
