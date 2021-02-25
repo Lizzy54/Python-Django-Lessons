@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block user %}
+    {% if user.is_authenticated %}
+        <li>
+            <a style="color: #fff;">Привет, {{user}}</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/logout">Выйти</a>
+        </li>
+    {% else %}
+        <li>
+            <a style="color: #fff;" href="/auth/login">Войти</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/register">Регистрация</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <form method="POST" action="{{ url }}">
+            {% csrf_token %}
+            <table>
+                <tr><td>Название статьи</td><td><input name="title" type="text" value="{{ article.title }}" style="color: #fff;"></td></tr>
+                <tr><td>Текст</td><td><textarea name="text" id="text" style="resize: none; height: 350px; width: 100%; color: #fff;">{{ article.text }}</textarea></td></tr>
+                <tr><td><input type="submit" value="Сохранить"></td></tr>
+            </table>
+        </form>
+    {% else %}
+        Войдите на сайт, чтобы добавлять статьи.
+    {% endif %}
+{% endblock %}
