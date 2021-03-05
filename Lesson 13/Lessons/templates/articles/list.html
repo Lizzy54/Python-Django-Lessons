@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Статьи{% endblock %}
+
+{% block user %}
+    {% if user.is_authenticated %}
+        <li>
+            <a style="color: #fff;">Привет, {{user}}</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/logout">Выйти</a>
+        </li>
+    {% else %}
+        <li>
+            <a style="color: #fff;" href="/auth/login">Войти</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/register">Регистрация</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if articles_list %} 
+        <span class="card-title"><h3>Статьи</h3></span>
+        <div class="collection">
+            {% if user.is_authenticated %}
+                {% if perms.Articles.add_article %}
+                    <a id="create_button" href="/articles/create" class="collection-item"><strong style="color: #fff;">Добавить новую статью</strong></a>
+                    <br>
+                {% endif %}
+            {% endif %}
+            <table>
+                {% for a in articles_list %}
+
+                    <tr>
+                        <td style="padding: 2px; width: 80%;">
+                            <a id="list_link" href="/articles/{{ a.id }}" class="collection-item">
+                                <strong style="color: #fff;">
+                                    {{a.title}}
+                                </strong>
+                                 
+                                <span style="color: #fff;" class="badge">
+                                    {{a.date}}
+                                </span>
+                            </a>
+                        </td>
+                        {% if user.is_authenticated %}
+                            {% if perms.Articles.change_article or perms.Articles.delete_article %}
+                                <td style="padding: 2px;">
+                                    {% if perms.Articles.change_article %}
+                                        <a class="waves-effect waves-light btn grey" href="/articles/{{ a.id }}/edit">Изменить</a>
+                                    {% endif %}
+                                    {% if perms.Articles.delete_article %}
+                                        <a class="waves-effect waves-light btn red darken-1" href="/articles/{{ a.id }}/delete">Удалить</a>
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}                
+            </table>
+        </div>
+    {% else %}
+        <div class="collection">
+            <a id="create_button" href="/articles/create" class="collection-item"><strong style="color: #fff;">Добавить новую статью</strong></a>
+        </div>
+    {% endif %}
+
+{% endblock %}

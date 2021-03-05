@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block user %}
+    {% if user.is_authenticated %}
+        <li>
+            <a style="color: #fff;">Привет, {{user}}</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/logout">Выйти</a>
+        </li>
+    {% else %}
+        <li>
+            <a style="color: #fff;" href="/auth/login">Войти</a>
+        </li>
+        <li>
+            <a style="color: #fff;" href="/auth/register">Регистрация</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{article.title}}</h1>
+    <p style="word-wrap: break-word;">{{article.text}}</p>
+    <br>
+    <em>{{article.date}}</em>
+    <br>
+    {% if user.is_authenticated %}
+        <form method="POST" action="{{ url }}comment">
+            {% csrf_token %}
+            <textarea name="text" id="text" style="resize: none; height: 100px; width: 100%; color: #fff;"></textarea>
+            <input type="submit" value="Сохранить">
+        </form>
+        <br>
+    {% endif %}
+    {% if comments %}
+        {% for a in comments %}
+            <h5>{{ a.name }}</h5>
+            <p style="word-wrap: break-word;">{{a.text}}</p>
+            <br>
+            <em>{{a.date}}</em>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

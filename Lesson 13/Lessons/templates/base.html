@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+</head>
+<body>
+    
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="card light-blue darken-4">
+                <img src="{% static 'img/logo.jpg' %}" style="width: 100px; margin: 20px; margin-bottom: 0px;">
+                <nav>
+                    <div id="nav" class="nav-wrapper">
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li>
+                                <a href="/">Главная</a>
+                            </li>
+                            <li>
+                                <a href="/articles">Статьи</a>
+                            </li>
+                            <div class="brand-logo right">
+                                {% block user %}{% endblock %}
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="card-content white-text">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
